@@ -1,6 +1,6 @@
 # Initial Changes
 
-At this point, you now have your testproject repository on GitHub and locally on your machine. Now it's time to start making some modifications.
+At this point, you now have your CGBuilders repository on GitHub and locally on your machine. Now it's time to start making some modifications.
 
 ### README
 
@@ -8,7 +8,7 @@ The first thing to do is update the README (`/README.md`), which should contain 
 
 ### License
 
-The testproject repository comes premade with a sample license (`/LICENSE.md`), in this case the very popular and permissive [BSD 3-Clause license](https://opensource.org/license/bsd-3-clause/). Feel free to change this for your own project or keep it as-is if you don't quite know yet.
+The CGBuilders repository comes premade with a sample license (`/LICENSE.md`), in this case the very popular and permissive [BSD 3-Clause license](https://opensource.org/license/bsd-3-clause/). Feel free to change this for your own project or keep it as-is if you don't quite know yet.
 
 !!! Tip
 
@@ -16,4 +16,4 @@ The testproject repository comes premade with a sample license (`/LICENSE.md`), 
 
 ### Code of Conduct
 
-The testproject repository ships with a premade Code of Conduct (`/CODE_OF_CONDUCT.md`) that is obtained from the [Contributor Covenant](https://www.contributor-covenant.org/). Of course, you can feel free to keep or change this as you see fit, but it is often a good idea to have a code of conduct for public repositories.
+The CGBuilders repository ships with a premade Code of Conduct (`/CODE_OF_CONDUCT.md`) that is obtained from the [Contributor Covenant](https://www.contributor-covenant.org/). Of course, you can feel free to keep or change this as you see fit, but it is often a good idea to have a code of conduct for public repositories.

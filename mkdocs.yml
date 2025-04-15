@@ -1,7 +1,7 @@
-site_name: testproject
+site_name: CGBuilders
 site_author: YourName
 site_description: >-
-  This is the testproject package!
+  This is the CGBuilders package!
 nav:
   - Home: index.md
   - Overview:
@@ -30,7 +30,7 @@ nav:
       - example_docs/about/conduct.md
       - example_docs/about/license.md
 
-repo_url: https://github.com/Quantum-Accelerators/testproject/
+repo_url: https://github.com/Quantum-Accelerators/CGBuilders/
 edit_uri: blob/main/docs/
 
 theme:

@@ -1,7 +1,7 @@
 import numpy as np
 import copy as cp
 import math
-from Template import Template
+from CGBuilder.Template import Template
 
 class TemplateWithPatch(Template):
 

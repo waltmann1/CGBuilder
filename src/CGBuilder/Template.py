@@ -1,5 +1,5 @@
 from __future__ import division
-from CGMolyAbs import CGMolyAbs
+from CGBuilder.CGMolyAbs import CGMolyAbs
 import numpy as np
 import numpy.linalg as la
 import Bio.PDB

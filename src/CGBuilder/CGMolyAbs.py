@@ -1,6 +1,6 @@
 from __future__ import division
 import numpy as np
-from Quaternion import QuaternionBetween
+from CGBuilder.Quaternion import QuaternionBetween
 import numpy.linalg as la
 
 

@@ -3,7 +3,7 @@ requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "CGBuilders"
+name = "CGBuilder"
 description="A Python package description goes here."
 version = "0.0.1"
 readme = "README.md"
@@ -25,7 +25,7 @@ classifiers = [
     "Operating System :: MacOS",
 ]
 requires-python = ">=3.9"
-dependencies = ["numpy"]
+dependencies = ["numpy", "mdanalysis", "biopython"]
 
 [project.optional-dependencies]
 dev = ["pytest>=7.4.0", "pytest-cov>=3.0.0", "ruff>=0.0.285"]
@@ -39,15 +39,15 @@ docs = [
 ]
 
 [project.urls]
-repository = "https://github.com/Quantum-Accelerators/testproject"
-documentation = "https://quantum-accelerators.github.io/testproject/"
-changelog = "https://github.com/Quantum-Accelerators/testproject/blob/main/CHANGELOG.md"
+repository = "https://github.com/waltmann1/CGBuilders"
+documentation = "https://waltmann1.github.io/CGBuilders/"
+changelog = "https://github.com/waltmann1/CGBuilder/blob/main/CHANGELOG.md"
 
 [tool.setuptools.package-data]
-testproject = ["py.typed"]
+CGBuilders = ["py.typed"]
 
 [tool.pyright]
-include = ["testproject"]
+include = ["CGBuilders"]
 exclude = ["**/__pycache__"]
 
 [tool.pytest.ini_options]
@@ -134,7 +134,7 @@ lint.unfixable = [
   "F841", # Removes unused variables
 ]
 lint.pydocstyle.convention = "numpy"
-lint.isort.known-first-party = ["testproject"]
+lint.isort.known-first-party = ["CGBuilders"]
 lint.isort.required-imports = ["from __future__ import annotations"]
 lint.isort.split-on-trailing-comma=false
 extend-include = ["*.ipynb"]

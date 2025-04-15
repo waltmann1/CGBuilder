@@ -45,7 +45,7 @@ jobs:
           echo "COVERAGE_CORE=sysmon" >> $GITHUB_ENV
 
       - name: Run tests with pytest
-        run: pytest --cov=testproject --cov-report=xml
+        run: pytest --cov=CGBuilders --cov-report=xml
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v5

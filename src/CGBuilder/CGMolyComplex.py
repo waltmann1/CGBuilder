@@ -1,7 +1,7 @@
 from __future__ import division
 import numpy as np
 import random
-from CGMolyAbs import CGMolyAbs
+from CGBuilder.CGMolyAbs import CGMolyAbs
 import copy as cp
 
 

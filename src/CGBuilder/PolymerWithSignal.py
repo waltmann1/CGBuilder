@@ -1,7 +1,7 @@
 import numpy.linalg as la
 import copy as cp
 import math
-from BasicPolymer import BasicPolymer
+from CGBuilder.BasicPolymer import BasicPolymer
 
 
 class PolymerWithSignal(BasicPolymer):

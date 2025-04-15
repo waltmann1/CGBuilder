@@ -2,7 +2,7 @@
 
 ## Purpose
 
-The first question to address is: why? Why use a testproject repository like this? Why make a Python package at all, as opposed to writing custom scripts or Jupyter Notebooks?
+The first question to address is: why? Why use a CGBuilders repository like this? Why make a Python package at all, as opposed to writing custom scripts or Jupyter Notebooks?
 
 The answer, in short, is _sustainable and reproducible_ software development. Here are some of the benefits:
 
@@ -15,12 +15,12 @@ Of course, there are many more reasons, but hopefully that's convincing enough!
 
 ## Alternatives
 
-This is by no means the only testproject of its kind. Some alternatives include:
+This is by no means the only CGBuilders of its kind. Some alternatives include:
 
 - [cookiecutter](https://github.com/cookiecutter/cookiecutter) and [cookiecutter-cms](https://github.com/MolSSI/cookiecutter-cms)
 - [pyscaffold](https://github.com/pyscaffold/pyscaffold)
-- [python-package-testproject](https://github.com/microsoft/python-package-testproject)
+- [python-package-CGBuilders](https://github.com/microsoft/python-package-CGBuilders)
 
 ... and many more.
 
-Feel free to use them if you wish! This testproject repository exists because we are all opinionated people, and this testproject focuses on things that I value most. But the point is to just use something that works well for you.
+Feel free to use them if you wish! This CGBuilders repository exists because we are all opinionated people, and this CGBuilders focuses on things that I value most. But the point is to just use something that works well for you.
