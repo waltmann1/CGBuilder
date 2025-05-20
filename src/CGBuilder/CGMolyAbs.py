@@ -1,4 +1,7 @@
 from __future__ import division
+
+import os.path
+
 import numpy as np
 from CGBuilder.Quaternion import QuaternionBetween
 import numpy.linalg as la
@@ -280,7 +283,14 @@ class CGMolyAbs(object):
             self.atom_types.append([int(i+1), np.sum(self.x_weights[i])])
 
     def abs_path(self, string):
-        return "/home/cwaltmann/PycharmProjects/Builders/" + string
+        
+        loc = os.path.abspath(__file__)
+        folders = loc.split("/")
+        strin = ""
+        for folder in folders[:-1]:
+            strin += folder + "/"
+        
+        return  strin + string
 
     def n_atom_types(self):
 

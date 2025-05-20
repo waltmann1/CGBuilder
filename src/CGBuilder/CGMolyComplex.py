@@ -171,6 +171,7 @@ class CGMolyComplex(object):
         for ind, line in enumerate(data):
             s = line.split()
             if s[0] == "ATOM":
+                """
                 if s[6].count(".") == 2:
                     s[8] = s[7]
                     s[7] = s[6][7:]
@@ -185,6 +186,13 @@ class CGMolyComplex(object):
                     s[7] = s[7][:7]
                 self.master_positions[count][1] = float(s[7])
                 self.master_positions[count][2] = float(s[8])
+                """
+                #print(line)
+                #print(s)
+                #print(float(line[32:38]), line[40:46], line[48:56])
+                self.master_positions[count][0] = float(line[31:38])
+                self.master_positions[count][1] = float(line[39:46])
+                self.master_positions[count][2] = float(line[47:56])
                 count += 1
     def reset_master_positions(self):
 
@@ -273,6 +281,51 @@ class CGMolyComplex(object):
         if nangles != 0:
             f.write("Angles\n\n")
             f.write(self.angles_string())
+
+    def write_lammpstrj(self, name=None):
+
+        if name is None:
+            name = self.name + ".data"
+
+        for moly in self.molys:
+            if moly.atom_types is None:
+                moly.set_atom_types()
+
+        with open(name, "w") as f:
+            f.write("ITEM: TIMESTEP\n")
+            f.write("0\n")
+            f.write("ITEM: NUMBER OF ATOMS\n")
+            natoms = np.sum([len(moly.site_indexes) * self.numbers[ind] for ind, moly in enumerate(self.molys)])
+            f.write(str(natoms) + "\n")
+            f.write("ITEM: BOX BOUNDS pp pp pp\n")
+            f.write("0 " + str(self.box[0]) + "\n")
+            f.write("0 " + str(self.box[1]) + "\n")
+            f.write("0 " + str(self.box[2]) + "\n")
+            f.write("ITEM: ATOMS id type xs ys zs\n")
+            f.write(self.atoms_lammps_string())
+
+
+
+    def atoms_lammps_string(self):
+
+        sring = ""
+        counter = 0
+        atoms_offset = 0
+        mol_tag = 1
+        for ind, moly in enumerate(self.molys):
+            for x in range(self.numbers[ind]):
+                for i in range(len(moly.site_indexes)):
+                    fracx =  self.master_positions[counter][0] / self.box[0]
+                    fracy = self.master_positions[counter][1] / self.box[1]
+                    fracz = self.master_positions[counter][2] / self.box[2]
+                    sring += (str(counter + 1) + " " + str(atoms_offset + moly.atom_types[i][0]) + " " + str(fracx) + " " +
+                              str(fracy) + " " + str(fracz) + "\n")
+                    counter += 1
+                mol_tag += 1
+            atoms_offset += moly.n_atom_types()
+        sring += "\n"
+        return sring
+
 
 
     #cut in angstroms
@@ -387,6 +440,15 @@ class CGMolyComplex(object):
         start, end = self.get_start_end(molyindex1, molyindex2)
         self.master_positions[start:end] = np.add(self.master_positions[start:end], vector)
 
+    def apply_lipid_flip(self, molyindex1, molyindex2, dist=7):
+
+        start, end = self.get_start_end(molyindex1, molyindex2)
+        vec = np.subtract(self.master_positions[start], self.master_positions[end-1])
+        u_vec = np.divide(vec, np.linalg.norm(vec))
+        for i in range(start, end):
+            j = i - start
+            self.master_positions[i] = np.add(self.master_positions[i], np.multiply(u_vec, 1 + dist * (1 + 2*j)))
+
 
     def extend_master_positions(self, molyindex1):
 
@@ -401,6 +463,12 @@ class CGMolyComplex(object):
     def set_moly_positions(self, positions, molyindex1, molyindex2):
         start, end = self.get_start_end(molyindex1, molyindex2)
         self.master_positions[start:end] = positions
+
+    def get_moly_positions(self, molyindex1, molyindex2):
+
+        start, end = self.get_start_end(molyindex1, molyindex2)
+
+        return self.master_positions[start:end]
 
     def center_complex(self):
 
