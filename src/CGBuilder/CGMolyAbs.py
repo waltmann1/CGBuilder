@@ -275,6 +275,16 @@ class CGMolyAbs(object):
                 s = line.split()
                 positions.append([float(s[0]), float(s[1]), float(s[2])])
         return positions
+    def read_mass(self, filename):
+
+        f = open(filename, "r")
+        mass = []
+        data = f.readlines()
+        for line in data:
+            if len(line) > 0:
+                s = line.split()
+                mass.append(float(s[0]))
+        return mass
 
     def set_atom_types(self):
 

@@ -399,6 +399,7 @@ class CGMolyComplex(object):
         for ind, moly in enumerate(self.molys):
             for x in range(self.numbers[ind]):
                 for i in range(len(moly.bonds)):
+                    #print(i, moly.bond_types[i], moly.bonds[i])
                     sring += str(counter + 1) + " " + str(int(bond_offset + moly.bond_types[i][0])) + " " + str(int(offset + moly.bonds[i][0])) + " " + str(
                         int(offset + moly.bonds[i][1])) + "\n"
                     counter += 1
@@ -512,7 +513,7 @@ class CGMolyComplex(object):
             average_pos = np.average(moly.positions, axis=0)
             for j in range(self.numbers[ind]):
                 self.shift_moly(-average_pos,ind,j)
-                print(average_pos, ind, j)
+                #print(average_pos, ind, j)
 
 
         extras = 0
@@ -526,7 +527,7 @@ class CGMolyComplex(object):
         rows = int(np.ceil(np.power(np.sum(self.numbers) + extras, 1 / 3)))
         if insert_polymer and center_poly:
             center_factor = int( (rows-blocked_length)/2 )
-        print(np.sum(self.numbers), rows, blocked_length)
+        #print(np.sum(self.numbers), rows, blocked_length)
 
         lattice_points = [[i,j,k] for i in range(rows) for j in range(rows) for k in range(rows)
                           if i >= blocked_length or j >= blocked_length or k >= blocked_length]
@@ -552,7 +553,7 @@ class CGMolyComplex(object):
             final_lattice[-1] = np.add(offset, np.multiply(.5 * blocked_length, [spacing, spacing, spacing]))
             if center_poly:
                 final_lattice[-1] = np.add(final_lattice[-1], np.multiply(center_factor, [spacing, spacing, spacing]))
-            print(final_lattice[-1])
+            #print(final_lattice[-1])
 
         counter = 0
         for ind, moly in enumerate(self.molys):

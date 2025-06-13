@@ -16,8 +16,48 @@ class Irsp53Sh3(CGMolyAbs):
         self.f_weights = [[1] for _ in range(18)]
         self.x_weights = [[10] for _ in range(18)]
         self.name = "Irsp53Sh3"
-        self.positions = [[0.0, 0.0, 0.0] for _ in range(len(domains))]
+        #self.positions = [[0.0, 0.0, 0.0] for _ in range(len(domains))]
+        self.positions = self.read_positions(self.abs_path("../../data/sh3_positions.txt"))
         self.atom_types = [[i+1, mass[i]] for i in range(18)]
         ave_pos = np.mean(self.positions, axis=0)
         self.positions = np.subtract(self.positions, ave_pos)
         self.get_bonds(self.abs_path("../../data/sh3_cghenm.txt"))
+
+    def add_linker(self, linker_length=16, uvec=[1,0,0]):
+        linker_mass = [550 for _ in range(linker_length)]
+        linker_site_indexes = [[] for _ in range(linker_length)]
+        linker_f_weights = [[1] for _ in range(linker_length)]
+        self.name += "WithLinker"
+        linker_positions = [np.multiply(uvec, 5.0 * i) for i in range(linker_length)]
+        linker_end = np.multiply(uvec, 5.0 * linker_length)
+        linker_positions = np.subtract(linker_positions, linker_end)
+        linker_positions = list(np.add(linker_positions, self.positions[0]))
+        linker_positions.extend(self.positions)
+        self.positions = linker_positions
+        linker_atom_types = [[1, linker_mass[i]] for i in range(linker_length)]
+        linker_bond_matrix = [[i + 1, i + 2] for i in range(linker_length)]
+        r0 = 5
+        k = 5
+        linker_bonds = [[1, r0, k] for _ in range(len(linker_bond_matrix))]
+        self.site_indexes.extend(linker_site_indexes)
+        self.f_weights.extend(linker_f_weights)
+        self.bonds = np.add(self.bonds, linker_length)
+        linker_bond_matrix.extend(self.bonds)
+        self.bonds = linker_bond_matrix
+        for i in range(len(self.bond_types)):
+            self.bond_types[i][0] = int(self.bond_types[i][0] + 1)
+        for i in range(len(self.atom_types)):
+            self.atom_types[i][0] = int(self.atom_types[i][0] + 1)
+        linker_bonds.extend(self.bond_types)
+        linker_atom_types.extend(self.atom_types)
+        self.bond_types = linker_bonds
+        self.atom_types = linker_atom_types
+
+
+class Irsp53Sh3WithLinker(Irsp53Sh3):
+
+    def __init__(self, linker_length=16, uvec= [1,0,0]):
+        super(Irsp53Sh3WithLinker, self).__init__()
+        self.add_linker(linker_length=linker_length, uvec=uvec)
+
+

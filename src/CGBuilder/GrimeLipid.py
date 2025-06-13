@@ -11,7 +11,7 @@ class GrimeLipid(CGMolyAbs):
     def __init__(self, lower=True):
         super(GrimeLipid, self).__init__()
         mass = [300 for _ in range(4)]
-        types = [3,2,2,1]
+        types = [3,3,2,1]
         self.site_indexes = [[] for _ in range(4)]
         self.f_weights = [1 for _ in range(4)]
         self.x_weights = [10 for _ in range(4)]
